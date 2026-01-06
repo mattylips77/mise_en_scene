@@ -1,21 +1,18 @@
 import {useState, useEffect} from "react";
 import {useAppContext} from "../contexts/appContext.jsx";
 
-import {Duration} from 'luxon'
-import {StarRating} from './StarRating.jsx'
-import {X} from 'lucide-react';
+import {X} from "lucide-react";
 
 import {MovieDataCarousel} from "./MovieDataCarousel.jsx";
 
 export const Movie = () => {
   const {selectedMovie, setSelectedMovie, userMovieData} = useAppContext()
-  console.log("Movie:userMovieData", userMovieData)
   const [posterError, setPosterError] = useState(false)
 
   useEffect(() => {
     setPosterError(false)
 
-  }, [selectedMovie, setPosterError])
+  }, [selectedMovie])
 
   const {
     datePublished,
@@ -40,12 +37,13 @@ export const Movie = () => {
         <div className="d-flex w-100 justify-content-center">
           {posterUrl && !posterError ?
               <img
+                  key={posterUrl}
                   src={posterUrl}
                   alt={title}
                   onError={() => setPosterError(true)}
                   style={{
-                    width: '250px',
-                    height: '387px'
+                    width: "250px",
+                    height: "387px"
                   }}
               />
               :

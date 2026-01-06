@@ -80,7 +80,7 @@ export const MovieList = () => {
             />
             <Dropdown>
               <Dropdown.Toggle variant="secondary" id="genre-dropdown">
-                {genreSearch || 'Select Genre'}
+                {genreSearch || "Select Genre"}
               </Dropdown.Toggle>
               <Dropdown.Menu>
                 <Dropdown.Item onClick={() => setGenreSearch('')}>

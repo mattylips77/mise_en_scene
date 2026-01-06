@@ -57,7 +57,7 @@ export const MovieDataCarousel = () => {
             <div style={{width: carouselWidth}}>
               My Notes
               <textarea
-                  style={{width: '100%', height: "150px"}}
+                  style={{width: "100%", height: "150px"}}
                   placeholder="Enter your notes on this movie here"
                   value={note}
                   onChange={notesHandler}
@@ -65,12 +65,12 @@ export const MovieDataCarousel = () => {
             </div>
           </div>
         </div>
-        <button className="carousel-control-prev" type="button" style={{left: "-35px", filter: 'invert(1)'}} data-bs-target="#carouselExampleIndicators"
+        <button className="carousel-control-prev" type="button" style={{left: "-35px", filter: "invert(1)"}} data-bs-target="#carouselExampleIndicators"
                 data-bs-slide="prev">
           <span className="carousel-control-prev-icon" aria-hidden="true"></span>
           <span className="visually-hidden">Previous</span>
         </button>
-        <button className="carousel-control-next" type="button"  style={{right: "-5px", filter: 'invert(1)'}} data-bs-target="#carouselExampleIndicators"
+        <button className="carousel-control-next" type="button"  style={{right: "-5px", filter: "invert(1)"}} data-bs-target="#carouselExampleIndicators"
                 data-bs-slide="next">
           <span className="carousel-control-next-icon" aria-hidden="true"></span>
           <span className="visually-hidden">Next</span>
