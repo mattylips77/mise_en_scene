@@ -105,17 +105,17 @@ function App() {
                   >{page}{index < pages.length - 1 && ','}</div>
               )}
               </div>
-              <div data-label="page_up_down" className="d-flex flex-grow-0 gap-1 text-nowrap">
+              <div data-label="page_up_down" className="d-flex flex-grow-0 gap-1 text-nowrap align-items-start">
                 <button onClick={() => setPageNumber(prevPageNumber => --prevPageNumber)}
                         disabled={(pageNumber === 1)}
-                        className="btn btn-link btn-sm text-decoration-none p-0">-
+                        className="btn btn-link btn-sm text-decoration-none p-0 fw-bold">-
                 </button>
                 <div>
                   Page: {pageNumber}<br/>
                 </div>
                 <button onClick={() => setPageNumber(prevPageNumber => ++prevPageNumber)}
                         disabled={(pageNumber >= totalPages)}
-                        className="btn btn-link btn-sm text-decoration-none p-0">+
+                        className="btn btn-link btn-sm text-decoration-none p-0 fw-bold">+
                 </button>
               </div>
             </div>
