@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react'
-import {keepPreviousData, useQuery} from "@tanstack/react-query";
+import {useQuery} from "@tanstack/react-query";
 import {useDebounce} from "use-debounce"
 import {Dropdown} from 'react-bootstrap';
 
@@ -47,6 +47,8 @@ function App() {
     setTitleSearch(e.target.value)
   }
 
+  console.log("moviesData", moviesData)
+
   const {data: movieData, totalPages, moviesTotal} = moviesData
   const {data: genres} = genreData
 
@@ -57,12 +59,14 @@ function App() {
         <div className="d-flex gap-5">
           <div className="d-flex flex-column w-100">
             <div data-label="header" className="d-flex flex-row justify-content-between mb-2">
-              <div className="d-flex flex-row justify-content-start gap-3">
+              <div className="d-flex flex-row justify-content-start gap-3 w-75">
                 <input
+                    data-label="title_search"
                     type="text"
+                    className="w-100"
                     value={titleSearch}
                     onChange={searchTitleHandler}
-                    placeholder="Enter Movie Title Here"
+                    placeholder="Search by Title"
                 />
                 <Dropdown>
                   <Dropdown.Toggle variant="secondary" id="genre-dropdown">
@@ -110,18 +114,16 @@ function App() {
                   Page: {pageNumber}<br/>
                 </div>
                 <button onClick={() => setPageNumber(prevPageNumber => ++prevPageNumber)}
-                        disabled={(pageNumber === totalPages)}
+                        disabled={(pageNumber >= totalPages)}
                         className="btn btn-link btn-sm text-decoration-none p-0">+
                 </button>
               </div>
             </div>
           </div>
           {
-              selectedMovie &&
-              <div className="d-flex flex-column mt-5" style={{width: "425px"}}>
-                {selectedMovie &&
+            (selectedMovie &&  Object.keys(selectedMovie).length > 0) &&
+              <div className="d-flex flex-column mt-5 border border-1 border-dark-subtle p-4" style={{width: "425px"}}>
                     <Movie movie={selectedMovie}/>
-                }
               </div>
           }
         </div>

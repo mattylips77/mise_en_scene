@@ -5,7 +5,7 @@ import { Duration } from 'luxon'
 import {StarRating} from './StarRating.jsx'
 
 export const Movie = () => {
-  const {selectedMovie, userData, userMovieData, setUserMovieData} = useAppContext()
+  const {selectedMovie, setSelectedMovie, userData, userMovieData, setUserMovieData} = useAppContext()
   console.log("Movie:userMovieData", userMovieData)
   const [posterError, setPosterError] = useState(false)
 
@@ -47,6 +47,7 @@ export const Movie = () => {
 
   return (
       <>
+        <div onClick={()=> setSelectedMovie({})}>Close</div>
         <h3>{title} {year && (year)}</h3>
         <div>
           {posterUrl && !posterError ?
@@ -70,6 +71,7 @@ export const Movie = () => {
         {mainActors.length > 0 && <div>Staring: {mainActors.join(", ")}</div> }
         {directors.length > 0 && <div>Directed by {directors.join(", ")}</div>}
         {duration && <div>Runtime: {Duration.fromISO(duration).toHuman()}</div>}
+        {summary && <div><div className="fw-bold">Summary</div><div>{summary}</div></div>}
         <div>
           My Notes
           <textarea
