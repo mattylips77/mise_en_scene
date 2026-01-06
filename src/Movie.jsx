@@ -14,6 +14,7 @@ export const Movie = () => {
 
   useEffect(() => {
     setPosterError(false)
+
   }, [selectedMovie])
 
   const {

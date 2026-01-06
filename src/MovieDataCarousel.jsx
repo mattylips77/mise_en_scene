@@ -1,3 +1,4 @@
+import {useEffect} from "react";
 import {StarRating} from "./StarRating.jsx";
 import {Duration} from "luxon";
 import {useAppContext} from "./contexts/appContext.jsx";
@@ -17,6 +18,10 @@ export const MovieDataCarousel = () => {
     writers = [],
   } = selectedMovie
 
+  useEffect(() => {
+    setUserMovieData(userData.find((movie) => movie.id === selectedMovie.id))
+  }, [selectedMovie])
+
   const notesHandler = (e) => {
     const noteValue = e.target.value
     setUserMovieData(prev => ({...prev, note: noteValue}))
@@ -24,11 +29,8 @@ export const MovieDataCarousel = () => {
   }
 
   const setLocalData = (userMovieData) => {
-    console.log("userMovieData", userMovieData)
-    console.log("userData", userData)
 
     const index = userData.findIndex(i => i.id === userMovieData.id);
-    console.log("index Match?", index)
     (index !== -1) ? userData[index] = {...userData[index], ...userMovieData} : userData.push(userMovieData);
 
     localStorage.setItem("userData", JSON.stringify(userData))
@@ -61,7 +63,7 @@ export const MovieDataCarousel = () => {
               <textarea
                   style={{width: '100%', height: "150px"}}
                   placeholder="Enter your notes on this movie here"
-                  value={userMovieData.note}
+                  value={userMovieData?.note || ""}
                   onChange={notesHandler}
               />
             </div>
