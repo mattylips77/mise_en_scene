@@ -4,7 +4,7 @@ import {useDebounce} from "use-debounce"
 import { Dropdown } from 'react-bootstrap';
 
 import {useAppContext} from "./contexts/appContext.jsx"
-import {fetchMovies, getGenres} from "./fetches.js"
+import {getMoviesNewQuery, getMoviesPage, getGenres} from "./fetches.js"
 
 import {Movie} from "./Movie.jsx";
 import {Result} from "./result.jsx";
@@ -17,48 +17,50 @@ function App() {
   const [genreSearch, setGenreSearch] = useState("")
   const [pageNumber, setPageNumber] = useState(1)
   const [debouncedSearch] = useDebounce(titleSearch, 300);
+  const [resetItemCount, setResetItemCount] = useState(false)
 
-  let query = '';
-  const query_movies = () => {
-    console.log("query movies")
-    query = `?${[
-      `page=${pageNumber}`,
-      titleSearch && `search=${titleSearch}`,
-      genreSearch && `genre=${genreSearch}`
-    ].filter(Boolean).join("&")}`;
+  const queryArgs = {
+    titleSearch,
+    genreSearch,
+    pageNumber
   }
 
-  query_movies()
+  console.log("queryArgs", queryArgs)
+
   const {data: moviesData, isLoading, isError, error, isFetching} = useQuery({
     queryKey: ['movies', debouncedSearch, genreSearch, pageNumber],
     queryFn: async ({signal}) => {
-      return await fetchMovies(query)
+      return await getMoviesNewQuery(queryArgs)
     },
     retry: 1,
-    placeholderData: {data: [], totalPages: []}
+    placeholderData: {data: [], totalPages: ''}
   })
 
   const {data: genreData} = useQuery({
     queryKey: ['genres'],
     queryFn: async ({signal}) => {
-      return await getGenres(query)
+      return await getGenres()
     },
     retry: 1,
     placeholderData: {data: [], totalPages: []}
   })
+
+  useEffect(() => {
+     if (!localStorage.getItem('userData')) {
+       localStorage.setItem('userData', JSON.stringify([]))
+     } else {
+       console.log('data', localStorage.getItem("userData"))
+     }
+  }, [])
 
   const searchTitleHandler = (e) => {
     setPageNumber(1)
     setTitleSearch(e.target.value)
   }
 
-
-
-  console.log("genreData", genreData.data)
-  const {data: movieData, totalPages} = moviesData
-  console.log("movieData", movieData)
+  console.log("moviesData", moviesData)
+  const {data: movieData, totalPages, moviesTotal} = moviesData
   const {data: genres} = genreData
-  console.log("selectedddddMove", selectedMovie)
 
 
   const pages = [...Array(totalPages).keys()].map(i => i + 1);
@@ -94,10 +96,15 @@ function App() {
           </Dropdown>
           <div data-label="page_up_down" className="d-flex flex-grow-0">
             <button onClick={() => setPageNumber(prevPageNumber => --prevPageNumber)}
+                    disabled={(pageNumber === 1)}
                     className="btn btn-primary btn-sm">-
             </button>
-            <div>Page Number: {pageNumber}</div>
+            <div>
+              Page: {pageNumber}<br/>
+              {moviesTotal}
+            </div>
             <button onClick={() => setPageNumber(prevPageNumber => ++prevPageNumber)}
+                    disabled={(pageNumber === totalPages)}
                     className="btn btn-primary btn-sm">+
             </button>
           </div>
