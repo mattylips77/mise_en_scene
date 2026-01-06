@@ -13,7 +13,7 @@ export const StarRating = ({ rating }) => {
           return (
               <div key={index} className="position-relative me-1" style={{ width: '24px', height: '24px' }}>
                 {/* Background star (empty/gray) */}
-                <Star className="position-absolute top-0 start-0 text-secondary" style={{ width: '24px', height: '24px' }} />
+                <Star className="position-absolute top-0 start-0 text-warning" style={{ width: '24px', height: '24px' }} />
 
                 {/* Foreground star (filled/black) with clip-path */}
                 <div
@@ -24,7 +24,7 @@ export const StarRating = ({ rating }) => {
                       clipPath: `inset(0 ${100 - fillPercentage}% 0 0)`
                     }}
                 >
-                  <Star className="text-dark" style={{ width: '24px', height: '24px', fill: 'black' }} />
+                  <Star className="text-warning" style={{ width: '24px', height: '24px', fill: "#ffc107" }} />
                 </div>
               </div>
           );

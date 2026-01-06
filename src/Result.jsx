@@ -7,7 +7,7 @@ export const Result = ({movie, index}) => {
   const {id, title, rating} = movie
   const [isHovered, setIsHovered] = useState(false)
 
-  const {id: selectedMovieId = null} = selectedMovie
+  const {id: selectedMovieId} = selectedMovie || {id: null}
 
   const getMovie= async (id) => {
     const movieData = await getMovieData(id)
@@ -23,7 +23,7 @@ export const Result = ({movie, index}) => {
   return (
     <div
         style={{cursor: "pointer"}}
-        className={`px-2 ${(isHovered || id === selectedMovie.id) ? "bg-primary-subtle" : isEven(index) ? "bg-white" : "bg-light"}`}
+        className={`px-2 ${(isHovered || id === selectedMovieId) ? "bg-primary-subtle" : isEven(index) ? "bg-white" : "bg-light"}`}
         onClick={() => getMovie(id)} id={id}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}

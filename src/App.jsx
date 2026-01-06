@@ -2,12 +2,14 @@ import {useState, useEffect} from 'react'
 import {useQuery} from "@tanstack/react-query";
 import {useDebounce} from "use-debounce"
 import {Dropdown} from 'react-bootstrap';
+import './App.css';
 
 import {useAppContext} from "./contexts/appContext.jsx"
 import {getMoviesNewQuery, getMoviesPage, getGenres} from "./fetches.js"
 
 import {Movie} from "./Movie.jsx";
 import {Result} from "./Result.jsx";
+
 
 
 function App() {
@@ -47,8 +49,6 @@ function App() {
     setTitleSearch(e.target.value)
   }
 
-  console.log("moviesData", moviesData)
-
   const {data: movieData, totalPages, moviesTotal} = moviesData
   const {data: genres} = genreData
 
@@ -57,7 +57,7 @@ function App() {
   return (
       <div data-label="app_container" className="w-75 mt-5">
         <div className="d-flex gap-5">
-          <div className="d-flex flex-column w-100">
+          <div className={`${selectedMovie ? "d-none" : "d-flex"} d-lg-flex flex-column w-100`}>
             <div data-label="header" className="d-flex flex-row justify-content-between mb-2">
               <div className="d-flex flex-row justify-content-start gap-3 w-75">
                 <input
@@ -90,22 +90,22 @@ function App() {
               </div>
               <div>{moviesTotal} Results</div>
             </div>
-            <div className="border border-1 border-dark-subtle" style={{height: "605px"}}>
+            <div className="border border-1 border-dark-subtle" style={{minHeight: "605px"}}>
               {movieData.map((movie, index) => <Result key={movie.id} index={index} movie={movie}/>)}
             </div>
 
             <div data-label="pagination" className="d-flex flex-row justify-content-between flex-shrink-1">
-              <div data-label="goto_pages" className="d-flex flex-row">
+              <div data-label="goto_pages">
                 Page {pages.map((page, index) =>
                   <div
                       key={page}
                       onClick={() => setPageNumber(page)}
-                      className={`d-flex px-1 ${pageNumber === index + 1 && "text-primary"}`}
+                      className={`d-inline-block px-1 ${pageNumber === index + 1 && "text-primary"}`}
                       style={{cursor: "pointer"}}
                   >{page}{index < pages.length - 1 && ','}</div>
               )}
               </div>
-              <div data-label="page_up_down" className="d-flex flex-grow-0 gap-1">
+              <div data-label="page_up_down" className="d-flex flex-grow-0 gap-1 text-nowrap">
                 <button onClick={() => setPageNumber(prevPageNumber => --prevPageNumber)}
                         disabled={(pageNumber === 1)}
                         className="btn btn-link btn-sm text-decoration-none p-0">-
@@ -121,8 +121,8 @@ function App() {
             </div>
           </div>
           {
-            (selectedMovie &&  Object.keys(selectedMovie).length > 0) &&
-              <div className="d-flex flex-column mt-5 border border-1 border-dark-subtle p-4" style={{width: "425px"}}>
+            selectedMovie &&
+              <div className={`${selectedMovie ? "d-flex" : "d-none"} movie_box_width d-lg-flex w-lg-25 flex-column mt-5 border border-1 border-dark-subtle p-4`}>
                     <Movie movie={selectedMovie}/>
               </div>
           }
