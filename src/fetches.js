@@ -53,7 +53,7 @@ export const getMoviesNewQuery = async (queryArgs) => {
     const last_page_count = last_page_data.data.length
     moviesTotal = 25 * totalPages + last_page_count // @todo allow updating limit
   } else {
-    moviesTotal = data.length || 0
+    moviesTotal = data.data.length
   }
   const newData = {...data, moviesTotal: moviesTotal}
   console.log("data after add", newData)
