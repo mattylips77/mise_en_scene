@@ -12,6 +12,7 @@
   "dependencies": {
     "@tanstack/react-query": "^5.90.16",
     "bootstrap": "^5.3.8",
+    "eslint-plugin-react": "^7.37.5",
     "lucide-react": "^0.562.0",
     "luxon": "^3.7.2",
     "react": "^19.2.0",

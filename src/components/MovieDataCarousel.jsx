@@ -1,9 +1,9 @@
 import {useEffect} from "react";
 import {StarRating} from "./StarRating.jsx";
 import {Duration} from "luxon";
-import {useAppContext} from "./contexts/appContext.jsx";
+import {useAppContext} from "../contexts/appContext.jsx";
 
-import {setLocalData} from "./utils.js";
+import {setLocalData} from "../utils/utils.js";
 
 export const MovieDataCarousel = () => {
   const carouselWidth = 250

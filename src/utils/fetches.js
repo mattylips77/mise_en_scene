@@ -1,5 +1,5 @@
 const apiKey = import.meta.env.VITE_API_TOKEN;
-import {api_url} from "./config.js"
+import {api_url} from "../config.js"
 
 
 
@@ -7,12 +7,6 @@ const fetch_headers = {
   'Authorization': `Bearer ${apiKey}`,
   'Content-Type': "application/json"
 }
-
-const query_movies = () => {
-  console.log('query movies')
-
-}
-
 export const getMoviesNewQuery = async (queryArgs) => {
   console.log("getMoviesNewQuery")
 

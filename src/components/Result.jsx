@@ -1,9 +1,9 @@
-import {getMovieData} from "./fetches.js"
-import {useAppContext} from "./contexts/appContext.jsx"
+import {getMovieData} from "../utils/fetches.js"
+import {useAppContext} from "../contexts/appContext.jsx"
 import {useState} from "react";
 
 export const Result = ({movie, index}) => {
-  const {selectedMovie = {}, setSelectedMovie, userData, setUserMovieData} = useAppContext()
+  const {selectedMovie = {}, setSelectedMovie} = useAppContext()
   const {id, title, rating} = movie
   const [isHovered, setIsHovered] = useState(false)
 
@@ -11,9 +11,7 @@ export const Result = ({movie, index}) => {
 
   const getMovie= async (id) => {
     const movieData = await getMovieData(id)
-    const userMovieData = userData.find((movie) => selectedMovieId === id) || {note: ""}
     setSelectedMovie(movieData)
-    setUserMovieData(userMovieData)
   }
 
   const isEven = (number) => {

@@ -1,6 +1,6 @@
 import {Star} from "lucide-react";
-import {useAppContext} from "./contexts/appContext.jsx";
-import {setLocalData} from "./utils.js";
+import {useAppContext} from "../contexts/appContext.jsx";
+import {setLocalData} from "../utils/utils.js";
 
 export const StarRating = ({rating, user}) => {
   const {selectedMovie, userData, userMovieData, setUserMovieData} = useAppContext()
@@ -17,7 +17,6 @@ export const StarRating = ({rating, user}) => {
   return (
       <div className="d-flex align-items-center">
         {[...Array(10)].map((_, index) => {
-          const starNumber = index + 1;
           const fillPercentage = Math.max(0, Math.min(1, clampedRating - index)) * 100;
 
           return (
