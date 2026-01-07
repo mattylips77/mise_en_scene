@@ -120,7 +120,7 @@ export const MovieList = () => {
               </ul>
             </div>
 
-            <div className="dropdown d-none d-md-block" id="limit_dropdown">
+            <div className={`dropdown d-none ${selectedMovie ? "d-xl-block" : "d-md-block"}`} id="limit_dropdown">
               <button
                   className="btn btn-outline-secondary btn-sm dropdown-toggle"
                   type="button"
