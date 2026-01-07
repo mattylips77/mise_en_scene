@@ -28,6 +28,7 @@ export const Movie = () => {
           <div className="fs-4 lh-1">{title}</div>
           <X
               onClick={() => setSelectedMovie(null)}
+              className="flex-shrink-0"
               style={{cursor: "pointer", display: "block"}}
               size={24}
           />
