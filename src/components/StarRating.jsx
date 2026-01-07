@@ -1,5 +1,5 @@
 import {Star} from "lucide-react";
-import {useAppContext} from "../contexts/appContext.jsx";
+import {useAppContext} from "../contexts/useAppContext.jsx";
 import {setLocalData} from "../utils/utils.js";
 
 export const StarRating = ({rating, user, size}) => {

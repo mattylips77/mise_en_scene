@@ -1,6 +1,6 @@
 import './App.css';
 
-import {useAppContext} from "./contexts/appContext.jsx"
+import {useAppContext} from "./contexts/useAppContext.jsx"
 
 import {Movie} from "./components/Movie.jsx";
 import {MovieList} from "./components/MovieList.jsx"

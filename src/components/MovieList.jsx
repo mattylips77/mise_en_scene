@@ -3,7 +3,7 @@ import {useQuery} from "@tanstack/react-query";
 import {useDebounce} from "use-debounce"
 import {Dropdown} from 'react-bootstrap';
 
-import {useAppContext} from "../contexts/appContext.jsx"
+import {useAppContext} from "../contexts/useAppContext.jsx";
 import {getMoviesNewQuery, getGenres } from "../utils/fetches.js"
 
 import {Result} from "./Result.jsx";
@@ -51,7 +51,7 @@ export const MovieList = () => {
 
       return () => clearTimeout(timer)
     } else {
-      setShowLoading(false)
+      setShowLoading(false) // @todo fix this lint error don't setState in a event
     }
   }, [isLoading, isFetching])
 
@@ -87,7 +87,7 @@ export const MovieList = () => {
                 placeholder="Search by Title"
             />
 
-            <div className="dropdown">
+            <div className="dropdown" id="genreDropDown">
               <button
                   className="btn btn-outline-secondary btn-sm dropdown-toggle"
                   type="button"
@@ -113,7 +113,7 @@ export const MovieList = () => {
               </ul>
             </div>
 
-            <div className="dropdown">
+            <div className="dropdown d-none d-md-block" id="limit_dropdown">
               <button
                   className="btn btn-outline-secondary btn-sm dropdown-toggle"
                   type="button"

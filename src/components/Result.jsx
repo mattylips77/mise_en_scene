@@ -1,5 +1,5 @@
 import {getMovieData} from "../utils/fetches.js"
-import {useAppContext} from "../contexts/appContext.jsx"
+import {useAppContext} from "../contexts/useAppContext.jsx";
 import {useState} from "react";
 import {StarRating} from "./StarRating.jsx";
 import {Star} from "lucide-react";

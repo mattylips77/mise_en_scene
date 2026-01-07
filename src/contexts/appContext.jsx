@@ -1,6 +1,6 @@
-import {createContext, useContext, useState} from 'react';
+import {createContext, useState} from 'react';
 
-const AppContext = createContext();
+ const AppContext = createContext();
 
 export function AppProvider({children}) {
   const [selectedMovie, setSelectedMovie] = useState()
@@ -30,10 +30,4 @@ export function AppProvider({children}) {
   );
 }
 
-export function useAppContext() {
-  const context = useContext(AppContext);
-  if (!context) {
-    throw new Error('useMovieContext must be used within MovieProvider');
-  }
-  return context;
-}
+export default AppContext

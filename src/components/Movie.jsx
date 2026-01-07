@@ -1,5 +1,5 @@
 import {useState, useEffect} from "react";
-import {useAppContext} from "../contexts/appContext.jsx";
+import {useAppContext} from "../contexts/useAppContext.jsx";
 
 import {X} from "lucide-react";
 
@@ -10,7 +10,7 @@ export const Movie = () => {
   const [posterError, setPosterError] = useState(false)
 
   useEffect(() => {
-    setPosterError(false)
+    setPosterError(false)  // @todo fix this lint error don't setState in a event
   }, [selectedMovie])
 
   const {
