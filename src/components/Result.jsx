@@ -31,8 +31,8 @@ export const Result = ({movie, index}) => {
           onClick={() => getMovie(id)} id={id}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
-
       >
+
         <div className="d-flex justify-content-between gap-4 align-items-center">
           <div>{title} ({rating ? rating : "Unrated"})</div>
           {my_rating &&
