@@ -70,7 +70,7 @@ export const MovieDataCarousel = () => {
                 style={{
                   left: "-35px",
                   filter: "invert(1)",
-                  top: '100px',
+                  top: '120px',
                   transform: 'translateY(-50%)',
                   bottom: 'auto',
                   height: '50px'
@@ -86,7 +86,7 @@ export const MovieDataCarousel = () => {
                 style={{
                   right: "-15px",
                   filter: "invert(1)",
-                  top: '100px',
+                  top: '120px',
                   transform: 'translateY(-50%)',
                   bottom: 'auto',
                   height: '50px'
