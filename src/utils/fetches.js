@@ -7,16 +7,19 @@ const fetchHeaders = {
   'Content-Type': "application/json"
 }
 
-export const getMoviesNewQuery = async (queryArgs) => {
-  console.log("getMoviesNewQuery")
-
-  const {titleSearch, genreSearch, limit, pageNumber} = queryArgs
-  const query = `?${[
-    `page=${pageNumber}`,
+const buildQuery = (queryArgs) => {
+  const {pageNumber, titleSearch, genreSearch, limit} = queryArgs
+  return `?${[`page=${pageNumber}`,
     titleSearch && `search=${titleSearch}`,
     genreSearch && `genre=${genreSearch}`,
     limit && `limit=${limit}`
   ].filter(Boolean).join("&")}`;
+}
+
+export const getMoviesNewQuery = async (queryArgs) => {
+  console.log("getMoviesNewQuery")
+
+  const query = buildQuery(queryArgs)
 
   const response = await fetch(`${api_url}/movies${query}`, {
     method: 'GET',
@@ -31,12 +34,8 @@ export const getMoviesNewQuery = async (queryArgs) => {
 
 
   if (totalPages > 1) {
-    const last_page_query = `?${[
-      `page=${totalPages}`,
-      titleSearch && `search=${titleSearch}`,
-      genreSearch && `genre=${genreSearch}`,
-      limit && `limit=${limit}`
-    ].filter(Boolean).join("&")}`;
+    const {titleSearch, genreSearch, limit} = queryArgs
+    const last_page_query = buildQuery({titleSearch, genreSearch, limit, pageNumber: totalPages})
 
     console.log('last_page_query', last_page_query)
 
@@ -55,24 +54,6 @@ export const getMoviesNewQuery = async (queryArgs) => {
 
   const newData = {...data, moviesTotal: moviesTotal}
   return newData
-}
-
-export const getMoviesPage = async (queryArgs) => {
-  const {titleSearch, genreSearch, limit, pageNumber} = queryArgs
-  const query = `?${[
-    `page=${pageNumber}`,
-    titleSearch && `search=${titleSearch}`,
-    genreSearch && `genre=${genreSearch}`,
-    limit && `limit=${limit}`
-  ].filter(Boolean).join("&")}`;
-
-  console.log("getMoviesPage")
-  const response = await fetch(`${api_url}/movies${query}`, {
-    method: 'GET',
-    headers: fetchHeaders
-  })
-  const data = await response.json()
-  return data
 }
 
 

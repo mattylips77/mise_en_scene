@@ -4,7 +4,7 @@ import {useDebounce} from "use-debounce"
 import {Dropdown} from 'react-bootstrap';
 
 import {useAppContext} from "../contexts/appContext.jsx"
-import {getMoviesNewQuery, getMoviesPage, getGenres } from "../utils/fetches.js"
+import {getMoviesNewQuery, getGenres } from "../utils/fetches.js"
 
 import {Result} from "./Result.jsx";
 
