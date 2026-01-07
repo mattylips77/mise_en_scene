@@ -73,6 +73,11 @@ export const MovieList = () => {
     setPageNumber(1)
   }
 
+  const limitChangeHandler = (limit) => {
+    setLimit(limit)
+    setPageNumber(1)
+  }
+
   const {data: movieData, totalPages, moviesTotal} = moviesData
   const {data: genres} = genreData
 
@@ -132,7 +137,7 @@ export const MovieList = () => {
               </button>
               <ul className="dropdown-menu dropdown-menu-sm" aria-labelledby="dropdownMenuButton">
                 {[25, 50, 75, 100].map((item) => (
-                    <li className="dropdown-item" onClick={()=>setLimit(item)}>
+                    <li className="dropdown-item" onClick={()=> limitChangeHandler(item)}>
                       {item} Per Page
                     </li>
                 ))}
