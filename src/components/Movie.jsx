@@ -24,7 +24,7 @@ export const Movie = () => {
 
   return (
       <>
-        <div className="d-flex justify-content-between align-items-start gap-4 bg-primary-subtle">
+        <div className="d-flex justify-content-between align-items-start gap-4">
           <div className="fs-4 lh-1">{title}</div>
           <X
               onClick={() => setSelectedMovie(null)}

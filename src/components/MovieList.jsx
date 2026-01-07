@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useRef} from 'react'
 import {useQuery} from "@tanstack/react-query";
 import {useDebounce} from "use-debounce"
 import {Dropdown} from 'react-bootstrap';
@@ -11,9 +11,11 @@ import {Result} from "./Result.jsx";
 export const MovieList = () => {
   const {selectedMovie} = useAppContext()
 
+  const scrollContainerRef = useRef(null);
+
   const [titleSearch, setTitleSearch] = useState("")
   const [genreSearch, setGenreSearch] = useState("")
-  const [limit, setLimit] = useState(50)
+  const [limit, setLimit] = useState(25)
   const [pageNumber, setPageNumber] = useState(1)
   const [showLoading, setShowLoading] = useState(false)
   const [debouncedSearch] = useDebounce(titleSearch, 300);
@@ -55,6 +57,12 @@ export const MovieList = () => {
     }
   }, [isLoading, isFetching])
 
+  useEffect(() => {
+    if (moviesData && scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTo({top: 0, behavior: 'smooth'});
+    }
+  },[moviesData])
+
   const searchTitleHandler = (e) => {
     setPageNumber(1)
     setTitleSearch(e.target.value)
@@ -86,7 +94,6 @@ export const MovieList = () => {
                 onChange={searchTitleHandler}
                 placeholder="Search by Title"
             />
-
             <div className="dropdown" id="genreDropDown">
               <button
                   className="btn btn-outline-secondary btn-sm dropdown-toggle"
@@ -134,7 +141,10 @@ export const MovieList = () => {
           </div>
           <div>{moviesTotal} Results</div>
         </div>
-        <div className="border border-1 border-dark-subtle overflow-y-auto" style={{height: "630px"}}>
+        <div
+            ref={scrollContainerRef}
+            className="border border-1 border-dark-subtle overflow-y-auto" style={{height: "630px"}}
+        >
           {movieData.map((movie, index) => <Result key={movie.id} index={index} movie={movie}/>)}
         </div>
 
