@@ -14,7 +14,10 @@ function App() {
           <MovieList />
           {
             selectedMovie &&
-              <div className={`${selectedMovie ? "d-flex" : "d-none"} movie_box_width d-lg-flex w-lg-25 flex-column mt-5 border border-1 border-dark-subtle p-4`}>
+              <div
+                  className={`${selectedMovie ? "d-flex" : "d-none"} movie_box_width d-lg-flex w-lg-25 flex-column border border-1 border-dark-subtle p-4`}
+                  style={{marginTop: "44px"}}
+              >
                     <Movie movie={selectedMovie}/>
               </div>
           }

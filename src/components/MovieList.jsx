@@ -134,7 +134,7 @@ export const MovieList = () => {
           </div>
           <div>{moviesTotal} Results</div>
         </div>
-        <div className="border border-1 border-dark-subtle overflow-y-auto" style={{height: "605px"}}>
+        <div className="border border-1 border-dark-subtle overflow-y-auto" style={{height: "630px"}}>
           {movieData.map((movie, index) => <Result key={movie.id} index={index} movie={movie}/>)}
         </div>
 
