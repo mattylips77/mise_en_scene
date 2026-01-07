@@ -6,12 +6,11 @@ import {X} from "lucide-react";
 import {MovieDataCarousel} from "./MovieDataCarousel.jsx";
 
 export const Movie = () => {
-  const {selectedMovie, setSelectedMovie, userMovieData} = useAppContext()
+  const {selectedMovie, setSelectedMovie} = useAppContext()
   const [posterError, setPosterError] = useState(false)
 
   useEffect(() => {
     setPosterError(false)
-
   }, [selectedMovie])
 
   const {
@@ -48,7 +47,7 @@ export const Movie = () => {
               />
               :
               <div className="d-flex flex-column justify-content-center bg-dark"
-                   style={{width: '250px', height: '387px'}}>
+                   style={{width: "250px", height: "387px"}}>
                 <div className="text-white w-full text-center">Poster Unavailable</div>
               </div>
           }

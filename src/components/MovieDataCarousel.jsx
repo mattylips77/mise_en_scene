@@ -36,13 +36,13 @@ export const MovieDataCarousel = () => {
       <div id="carouselExampleIndicators" className="carousel slide mt-3 overflow-visible d-flex justify-content-center">
         <div className="carousel-inner px-3" style={{minHeight: "200px", width: "300px"}}>
           <div className="carousel-item active">
-            <div style={{width: carouselWidth}}>
-              {ratingValue && <div>Audience Rating: <StarRating rating={ratingValue}/></div>}
-              {<div>My Rating: <StarRating rating={my_rating} user={true}/></div>}
-              {mainActors.length > 0 && <div>Staring: {mainActors.join(", ")}</div>}
-              {directors.length > 0 && <div>Directed by {directors.join(", ")}</div>}
-              {writers && <div>Written by: {writers.join(", ")}</div>}
-              {duration && <div>Runtime: {Duration.fromISO(duration).toHuman()}</div>}
+            <div className="lh-sm my-2" style={{width: carouselWidth}}>
+              {ratingValue && <div className="mb-3">Audience Rating: <StarRating rating={ratingValue}/></div>}
+              {<div className="mb-3">My Rating: <StarRating rating={my_rating} user={true}/></div>}
+              {mainActors.length > 0 && <div className="mb-2"><strong>Staring:</strong> {mainActors.join(", ")}</div>}
+              {directors.length > 0 && <div className="mb-2"><strong>Directed by:</strong> {directors.join(", ")}</div>}
+              {writers && <div className="mb-2"><strong>Written by:</strong> {writers.join(", ")}</div>}
+              {duration && <div><strong>Runtime:</strong> {Duration.fromISO(duration).toHuman()}</div>}
             </div>
           </div>
           <div className="carousel-item">
@@ -65,13 +65,35 @@ export const MovieDataCarousel = () => {
             </div>
           </div>
         </div>
-        <button className="carousel-control-prev" type="button" style={{left: "-35px", filter: "invert(1)"}} data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="prev">
+        <button className="carousel-control-prev"
+                type="button"
+                style={{
+                  left: "-35px",
+                  filter: "invert(1)",
+                  top: '100px',
+                  transform: 'translateY(-50%)',
+                  bottom: 'auto',
+                  height: '50px'
+                }}
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev"
+        >
           <span className="carousel-control-prev-icon" aria-hidden="true"></span>
           <span className="visually-hidden">Previous</span>
         </button>
-        <button className="carousel-control-next" type="button"  style={{right: "-5px", filter: "invert(1)"}} data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="next">
+        <button className="carousel-control-next"
+                type="button"
+                style={{
+                  right: "-15px",
+                  filter: "invert(1)",
+                  top: '100px',
+                  transform: 'translateY(-50%)',
+                  bottom: 'auto',
+                  height: '50px'
+                }}
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next"
+        >
           <span className="carousel-control-next-icon" aria-hidden="true"></span>
           <span className="visually-hidden">Next</span>
         </button>

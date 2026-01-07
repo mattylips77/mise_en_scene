@@ -5,12 +5,8 @@ import {useAppContext} from "./contexts/appContext.jsx"
 import {Movie} from "./components/Movie.jsx";
 import {MovieList} from "./components/MovieList.jsx"
 
-
-
-
 function App() {
   const {selectedMovie} = useAppContext()
-
 
   return (
       <div data-label="app_container" className="w-75 mt-5" style={{maxWidth: "1000px"}}>

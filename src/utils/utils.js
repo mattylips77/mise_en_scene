@@ -5,3 +5,7 @@ export const setLocalData = (userMovieData, userData) => {
 
   localStorage.setItem("userData", JSON.stringify(userData))
 }
+
+export const isEven = (number) => {
+  return number % 2 === 0
+}
