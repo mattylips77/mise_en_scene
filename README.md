@@ -1,7 +1,12 @@
 # Read Me
 
 This was a very fun project to work on. I probably spent more time tinkering it that I should have, but was really 
-enjoying my self got lost in the build a bit.  I focused of building a solid user interface with a clean look and feel.
+enjoying my self got lost in the build a bit.  I focused of building a solid user interface with a clean look and 
+feel.  The set up is pretty straight forward.  Search terms and dropdowns at the top.  Click on a movie result to 
+get the details from that movie.  To save space I broke up the movie details into 3 slides of a carousel.  Also if 
+the movie poster is not listed or returns a 404 I replaced it with markup.  There are still instances of broken 
+images when the amazon link return a "not found" message instead of 404'ing (All about Eve for example).  Given more 
+time I would find a solution for that as well.
 
 I added some additional functionality where the user can add notes on each movie and give them a personal rating as 
 well as notes on the film. 
