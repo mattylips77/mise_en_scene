@@ -4,7 +4,7 @@ import {QueryClient, QueryClientProvider} from '@tanstack/react-query'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js' // Includes Popper.js
 import App from './App.jsx'
-import {AppProvider} from "./contexts/appContext.jsx";
+import {AppProvider} from "./contexts/AppContext.jsx";
 
 const queryClient = new QueryClient({
   defaultOptions: {
