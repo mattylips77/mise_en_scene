@@ -4,7 +4,7 @@ import {useDebounce} from "use-debounce"
 import {Dropdown} from 'react-bootstrap';
 
 import {useAppContext} from "../contexts/appContext.jsx"
-import {getMoviesNewQuery, getGenres} from "../utils/fetches.js"
+import {getMoviesNewQuery, getMoviesPage, getGenres } from "../utils/fetches.js"
 
 import {Result} from "./Result.jsx";
 
@@ -13,6 +13,7 @@ export const MovieList = () => {
 
   const [titleSearch, setTitleSearch] = useState("")
   const [genreSearch, setGenreSearch] = useState("")
+  const [limit, setLimit] = useState(50)
   const [pageNumber, setPageNumber] = useState(1)
   const [showLoading, setShowLoading] = useState(false)
   const [debouncedSearch] = useDebounce(titleSearch, 300);
@@ -20,16 +21,18 @@ export const MovieList = () => {
   const queryArgs = {
     titleSearch,
     genreSearch,
+    limit,
     pageNumber
   }
   const {data: moviesData, isLoading, isError, error, isFetching} = useQuery({
-    queryKey: ['movies', debouncedSearch, genreSearch, pageNumber],
+    queryKey: ['movies', debouncedSearch, genreSearch, limit, pageNumber],
     queryFn: async () => {
       return await getMoviesNewQuery(queryArgs)
     },
     retry: 1,
     placeholderData: (previousData) => previousData || {data: [], totalPages: ''}
   })
+
 
   const {data: genreData} = useQuery({
     queryKey: ['genres'],
@@ -57,6 +60,11 @@ export const MovieList = () => {
     setTitleSearch(e.target.value)
   }
 
+  const genreChangeHandler = (genre) => {
+    setGenreSearch(genre)
+    setPageNumber(1)
+  }
+
   const {data: movieData, totalPages, moviesTotal} = moviesData
   const {data: genres} = genreData
 
@@ -78,29 +86,55 @@ export const MovieList = () => {
                 onChange={searchTitleHandler}
                 placeholder="Search by Title"
             />
-            <Dropdown>
-              <Dropdown.Toggle variant="secondary" id="genre-dropdown">
+
+            <div className="dropdown">
+              <button
+                  className="btn btn-outline-secondary btn-sm dropdown-toggle"
+                  type="button"
+                  id="dropdownMenuButton"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+              >
                 {genreSearch || "Select Genre"}
-              </Dropdown.Toggle>
-              <Dropdown.Menu>
-                <Dropdown.Item onClick={() => setGenreSearch('')}>
+              </button>
+              <ul className="dropdown-menu dropdown-menu-sm" aria-labelledby="dropdownMenuButton">
+                <li className="dropdown-item" onClick={() => genreChangeHandler('')}>
                   All Genres
-                </Dropdown.Item>
+                </li>
                 {genres.map((genre) => (
-                    <Dropdown.Item
+                    <li
+                        className="dropdown-item"
                         key={genre.id}
-                        onClick={() => setGenreSearch(genre.title)}
-                        active={genreSearch === genre.title}
+                        onClick={() => genreChangeHandler(genre.title)}
                     >
                       {genre.title}
-                    </Dropdown.Item>
+                    </li>
                 ))}
-              </Dropdown.Menu>
-            </Dropdown>
+              </ul>
+            </div>
+
+            <div className="dropdown">
+              <button
+                  className="btn btn-outline-secondary btn-sm dropdown-toggle"
+                  type="button"
+                  id="dropdownMenuButton"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+              >
+                {limit} Per Page
+              </button>
+              <ul className="dropdown-menu dropdown-menu-sm" aria-labelledby="dropdownMenuButton">
+                {[25, 50, 75, 100].map((item) => (
+                    <li className="dropdown-item" onClick={()=>setLimit(item)}>
+                      {item} Per Page
+                    </li>
+                ))}
+              </ul>
+            </div>
           </div>
           <div>{moviesTotal} Results</div>
         </div>
-        <div className="border border-1 border-dark-subtle" style={{minHeight: "605px"}}>
+        <div className="border border-1 border-dark-subtle overflow-y-auto" style={{height: "605px"}}>
           {movieData.map((movie, index) => <Result key={movie.id} index={index} movie={movie}/>)}
         </div>
 

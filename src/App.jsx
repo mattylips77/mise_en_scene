@@ -10,7 +10,6 @@ function App() {
 
   return (
       <div data-label="app_container" className="w-75 mt-5" style={{maxWidth: "1000px"}}>
-        {(selectedMovie) ? "true" : "false"}
         <div className="d-flex gap-5">
           <MovieList />
           {
